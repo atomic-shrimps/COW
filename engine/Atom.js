@@ -1,12 +1,24 @@
-function Atom(arg)
+function Atom(arg={},asyncLoaded=false)
 {
+	this.ready=new Promise(resolve=>this.notifyIsReady=resolve);
 	this.pos=!arg.pos?[0,0]:arg.pos;
 	this.evt=!arg.evt?{}:arg.evt;
 	this.type=this.__proto__.constructor.name;
 	this.children=!arg.children?[]:arg.children;
 	this.id=!arg.id?"Me":arg.id;
+	this.atomic=true;
+	this.on=function(e,handler){
+		this.etv[e]=this.etv[e]?this.etv[e]:[];
+		this.etv[e].push(handler);
+	}
+	this.unbind=function(e,handler){
+		this.etv[e]=this.etv[e]?this.etv[e]:[];
+		var index=this.etv[e].indexOf(handler);
+		if(index!=-1)this.etv[e].splice(index,1);
+	}
 	this.trigger=function(e,param)
 	{
+		if(!this.evt[e])return;
 		var propagate=true;
 		this.evt[e].forEach(handler=>{
 			var res=handler(param);
@@ -14,8 +26,12 @@ function Atom(arg)
 			else if(res!==undefined)param=res;
 		});
 		if(propagate)this.children.forEach(child=>{
-			child.trigger(e,param);
+			if(child.atomic)child.trigger(e,param);
 		});
+	}
+	this.trigger_ex=function(e,param){ // Trigger event exclusively here
+		if(!this.evt[e])return;
+		this.evt[e].forEach(handler=>handler(param));
 	}
 	this.answer=function(param)
 	{
@@ -48,10 +64,44 @@ function Atom(arg)
 		var tans=this.answer(param);
 		if(tans===undefined)
 			this.children.forEach(child=>{
+				if(!child.atomic)return;
 				var cans=child.askfor(param);
 				if(cans!==undefined)ans=ans.concat(cans);
 			})
 		else ans.push(tans)
 		return ans.length==0?undefined:ans;
 	}
+	this.addTo=function(parent){
+        if(parent.atomic)parent.addChild(this);
+        this.trigger_ex("addTo",parent);
+	}
+	this.removeFrom=function(parent){
+        if(parent.atomic)parent.removeChild(this);
+        this.trigger_ex("removeFrom",parent);
+    }
+    this.addChild=function(child){
+        this.children.push(child);
+        this.trigger_ex("addChild",child);
+    }
+    this.removeChild=function(child){
+		var index=this.children.indexOf(child);
+		if(index!=-1)this.children.splice(index,1);
+        this.trigger_ex("removeChild",child);
+	}
+	this.ready.then(()=>{
+		var exploreArg=(_arg, tail=[])=>{
+			Object.keys(_arg).forEach(argKey=>{
+				if(typeof(_arg[argKey])=="object")exploreArg(_arg[argKey],tail.concat([argKey]))
+				else if(typeof(_arg[argKey])!="function"){
+					var node=this;
+					tail.forEach(tailKey=>{
+						if(tailKey!=argKey&&node)node=node[tailKey]
+					})
+					if(node)node[argKey]=_arg[argKey];
+				}
+			})
+		}
+		exploreArg(arg,[]);
+	})
+	if(!asyncLoaded)this.notifyIsReady();
 }

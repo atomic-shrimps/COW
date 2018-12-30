@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="524"
+   height="209"
+   viewBox="0 0 138.64192 55.297951"
+   version="1.1"
+   id="svg1706"
+   sodipodi:docname="ground-cannon.svg"
+   inkscape:export-filename="C:\Users\lucas\Desktop\Atomic Shrimps\COW\assets\ground-cannon.png"
+   inkscape:export-xdpi="109.92367"
+   inkscape:export-ydpi="109.92367"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <defs
+     id="defs1700" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="64.285714"
+     inkscape:cy="554.28571"
+     inkscape:document-units="px"
+     inkscape:current-layer="g1666"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata1703">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-241.70143)">
+    <g
+       style="stroke:#000000;stroke-width:1.06809449;stroke-miterlimit:4;stroke-dasharray:none"
+       id="g1666"
+       transform="matrix(2.002572,0,0,2.002572,-200.23047,-201.06612)">
+      <path
+         style="fill:#ffffff;stroke:#000000;stroke-width:8.08415318;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 175.56055 43.972656 L 81.800781 52.214844 L 42.648438 156.2793 L 226.04688 161.43164 L 175.56055 43.972656 z M 157.70898 79.644531 L 175.12695 132.88672 L 94.902344 125.42383 L 107.26562 89.363281 L 157.70898 79.644531 z "
+         transform="matrix(0.132122,0,0,0.132122,99.986652,221.09942)"
+         id="path1662" />
+    </g>
+    <path
+       inkscape:transform-center-y="-0.017303053"
+       inkscape:transform-center-x="-8.2441191"
+       style="fill:#ffffff;stroke:#000000;stroke-width:2.13893628;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 126.42288,261.56044 0.0993,18.52431 c 0,0 -8.74082,-2.07399 -20.51949,5.13067 -5.36763,3.28323 -17.718058,6.98002 -26.032458,-2.03069 -8.31446,-9.01077 -4.05458,-24.02711 6.6927,-26.73808 10.747224,-2.71093 16.343138,1.73779 18.905048,2.8482 10.83624,4.6965 20.855,2.26559 20.855,2.26559 z"
+       id="path1668"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccscssc" />
+    <circle
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.13893628;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="circle1670"
+       cx="18.272104"
+       cy="279.83295"
+       r="10.242064" />
+    <circle
+       r="10.242064"
+       cy="281.06696"
+       cx="53.31728"
+       id="circle1672"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.13893628;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <ellipse
+       ry="1.1164302"
+       rx="1.0564071"
+       cy="279.88406"
+       cx="18.106188"
+       id="ellipse1674"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.13893628;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.13893628;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse1676"
+       cx="53.447811"
+       cy="281.22855"
+       rx="1.0564071"
+       ry="1.1164302" />
+  </g>
+</svg>

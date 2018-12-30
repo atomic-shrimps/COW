@@ -14,7 +14,7 @@
    viewBox="0 0 338.66666 190.50001"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="scene.svg">
   <defs
      id="defs2">
@@ -900,24 +900,30 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.6151829"
-     inkscape:cx="701.43373"
-     inkscape:cy="339.83999"
+     inkscape:zoom="3.48"
+     inkscape:cx="507.13185"
+     inkscape:cy="169.92047"
      inkscape:document-units="px"
-     inkscape:current-layer="g1651"
+     inkscape:current-layer="g8107"
      showgrid="false"
      units="px"
      inkscape:window-width="1366"
-     inkscape:window-height="745"
+     inkscape:window-height="705"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:snap-global="false"
-     showguides="false"
-     inkscape:lockguides="true">
+     showguides="true"
+     inkscape:lockguides="true"
+     inkscape:guide-bbox="true">
     <inkscape:grid
        type="xygrid"
        id="grid2627" />
+    <sodipodi:guide
+       position="130.23886,45.465759"
+       orientation="0,1"
+       id="guide1622"
+       inkscape:locked="true" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">

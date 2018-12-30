@@ -1,0 +1,20 @@
+{
+"frames": {
+	"body": {
+		"frame": {"x":0, "y":0, "w":248, "h":172},
+		"spriteSourceSize": {"x":0,"y":0,"w":248,"h":172},
+		"sourceSize": {"w":248,"h":172}
+	},
+	"turret": {
+		"frame": {"x":0, "y":173, "w":228, "h":152},
+		"spriteSourceSize": {"x":0,"y":0,"w":228,"h":152},
+		"sourceSize": {"w":228,"h":152}
+	}
+
+},
+"meta": {
+	"image": "ground-cannon.png",
+	"size": {"w": 249, "h": 326},
+	"scale": "1"
+}
+}
