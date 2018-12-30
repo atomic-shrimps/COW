@@ -5,9 +5,12 @@ function Atom(arg={})
 	this.type=this.__proto__.constructor.name;
 	this.children=!arg.children?[]:arg.children;
 	this.id=!arg.id?"Me":arg.id;
+	this.atomic=true;
+	this.parent=null;
 	this.trigger=function(e,param)
 	{
 		var propagate=true;
+		if(e in this.evt)
 		this.evt[e].forEach(handler=>{
 			var res=handler(param);
 			if(res===false)propagate=false;
@@ -16,6 +19,11 @@ function Atom(arg={})
 		if(propagate)this.children.forEach(child=>{
 			child.trigger(e,param);
 		});
+	}
+	this.on=function(evt,handler)
+	{
+		if(evt in this.evt)this.evt[evt].push(handler);
+		else this.evt[evt]=[handler];
 	}
 	this.answer=function(param)
 	{
@@ -53,5 +61,10 @@ function Atom(arg={})
 			})
 		else ans.push(tans)
 		return ans.length==0?undefined:ans;
+	}
+	this.addChild=function(child)
+	{
+		child.parent=this;
+		this.children.push(child);
 	}
 }
