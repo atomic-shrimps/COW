@@ -6,9 +6,9 @@ function Pack(arg={})
 	packs.push(this.res);
 }
 
-function PixiWorld(arg)
+function PixiWorld(arg,asyncloaded=true)
 {
-	Atom.call(this,arg);
+	Atom.call(this,arg,asyncloaded);
 
 	this.display = new PIXI.Application();
 	var display=this.display;

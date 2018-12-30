@@ -1,9 +1,9 @@
-function Animatable(arg={})
+function Animatable(arg={},asyncloaded=true)
 {
 	var self=this;
-	Atom.call(this,arg);
+	Atom.call(this,arg,asyncloaded);
 	this.ref=[arg.pack,arg.proj,arg.arm];
-	this.defanim=!arg.defanim?"Walk":arg.defanim;
+	this.defanim=!arg.defanim?"Idle":arg.defanim;
 	this.sprite={};
 	this.loaded=false;
 	this.transform=new Proxy({},
@@ -44,7 +44,7 @@ function loadAnim(anim,parent,res)
 	factory.parseDragonBonesData(resources[cow[0]].data);
 	factory.parseTextureAtlasData(resources[cow[1]].data, resources[cow[2]].texture);
 	var armatureDisplay = factory.buildArmatureDisplay(anim.ref[2], anim.ref[1]);
-	armatureDisplay.animation.play(anim.defanim);
+	armatureDisplay.animation.play(anim.defanim,1);
 	anim.sprite=armatureDisplay;
 	armatureDisplay.x = anim.pos[0];
 	armatureDisplay.y = anim.pos[1];

@@ -14,6 +14,7 @@
 <script src="engine/PixiWorld.js"></script>
 <script src="engine/Animatable.js"></script>
 <script src="engine/Controllable.js"></script>
+<script src="pack/COW/Player.js"></script>
 <script>
 	var world=new Atom({children:[]});
 	var cow= new Pack({res:[
@@ -23,13 +24,9 @@
 	]});
 	
 	var stickmen=new PixiWorld({});
-	var n=10;
-	for(var i=0;i<n;i++)
-	{
-		var stickman=stickmen.addChild(new Controllable({pack:cow,proj:"COW",arm:"Stickman"}));
-		stickman.pos[0]=(window.innerWidth/n)*i;
-		stickman.pos[1]=window.innerHeight/2;
-	}
+	var stickman=stickmen.addChild(new Player({pack:cow,proj:"COW",arm:"Stickman"}));
+	stickman.pos[0]=window.innerWidth/2;
+	stickman.pos[1]=window.innerHeight/2;
 </script>
 </body>
 </html>

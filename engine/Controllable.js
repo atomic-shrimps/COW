@@ -1,7 +1,7 @@
-function Controllable(arg={})
+function Controllable(arg={},asyncloaded=true)
 {
 	var self=this;
-	Animatable.call(this,arg);
+	Animatable.call(this,arg,asyncloaded);
 	this.code=!arg.code?"wasd":arg.code;
 	this.anim=!arg.anim?["Idle","Walk","Jump"]:arg.anim;
 	this.press=new Array(this.code.length).fill(0);
