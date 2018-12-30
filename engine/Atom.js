@@ -21,7 +21,6 @@ function Atom(arg={},asyncLoaded=false)
 	this.parent=null;
 	this.trigger=function(e,param)
 	{
-		if(!this.evt[e])return;
 		var propagate=true;
 		if(e in this.evt)
 		this.evt[e].forEach(handler=>{
@@ -88,7 +87,7 @@ function Atom(arg={},asyncLoaded=false)
 		return this;
     }
     this.addChild=function(child){
-		this.children.parent=this;
+		child.parent=this;
         this.children.push(child);
 		this.trigger_ex("addChild",child);
 		return this;
