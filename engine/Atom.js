@@ -1,4 +1,4 @@
-function Atom(arg)
+function Atom(arg={})
 {
 	this.pos=!arg.pos?[0,0]:arg.pos;
 	this.evt=!arg.evt?{}:arg.evt;

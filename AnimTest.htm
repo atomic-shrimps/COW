@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Castles Of War</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.4/pixi.min.js"></script>
+<script src="external/dragonBones.js"></script>
+<script src="engine/Atom.js"></script>
+<script src="engine/Animatable.js"></script>
+<script>
+	var world=new Atom({children:[]});
+	var cow= new Pack({res:[
+	"pack/COW/COW_ske.dbbin",
+	"pack/COW/COW_tex.json",
+	"pack/COW/COW_tex.png"
+	]});
+	var stickmen=[];
+	var n=50;
+	for(var i=0;i<n;i++)
+	{
+		stickmen.push(new Animatable({pack:cow,proj:"COW",arm:"Stickman"}));
+		var stickman=stickmen[stickmen.length-1];
+		stickman.pos[1]=(2*window.innerHeight)/3;
+		stickman.pos[0]=(window.innerWidth/n)*i;
+		stickman.defanim="Walk";
+	}
+	var jump=false;
+	setTimeout(()=>
+	{
+		stickmen.forEach(stickman=>
+		{
+			//stickman.sprite.animation.play(jump?"WalkJump":"Walk");
+			stickman.sprite.animation.advanceTime(Math.random()*100);
+			stickman.pos[1]+=(Math.random()*500)-250;
+			jump=!jump;
+		})
+	},1000);
+	setInterval(()=>{
+	stickmen.forEach(stickman=>{
+	stickman.pos[0]--;stickman.pos[0]=((stickman.pos[0]+window.innerWidth)%window.innerWidth)});
+	},2);
+	PixiWorld();
+</script>
+</body>
+</html>
