@@ -100,20 +100,22 @@ function Atom(arg={},asyncLoaded=false)
 		this.trigger_ex("removeChild",child);
 		return this;
 	}
-	this.ready.then(()=>{
-		var exploreArg=(_arg, tail=[])=>{
-			Object.keys(_arg).forEach(argKey=>{
-				if(typeof(_arg[argKey])=="object")exploreArg(_arg[argKey],tail.concat([argKey]))
-				else if(typeof(_arg[argKey])!="function"){
-					var node=this;
-					tail.forEach(tailKey=>{
-						if(tailKey!=argKey&&node)node=node[tailKey]
-					})
-					if(node)node[argKey]=_arg[argKey];
-				}
-			})
-		}
-		exploreArg(arg,[]);
+	setTimeout(()=>{
+		this.ready.then(()=>{
+			var exploreArg=(_arg, tail=[])=>{
+				Object.keys(_arg).forEach(argKey=>{
+					if(typeof(_arg[argKey])=="object")exploreArg(_arg[argKey],tail.concat([argKey]))
+					else if(typeof(_arg[argKey])!="function"){
+						var node=this;
+						tail.forEach(tailKey=>{
+							if(tailKey!=argKey&&node)node=node[tailKey]
+						})
+						if(node)node[argKey]=_arg[argKey];
+					}
+				})
+			}
+			exploreArg(arg,[]);
+		})
 	})
 	if(!asyncLoaded)this.notifyIsReady();
 }

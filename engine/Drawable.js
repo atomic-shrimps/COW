@@ -5,7 +5,8 @@ function Drawable(arg={}){ // src[,frame]
     this.ready
         .then(()=>{
             this.transform=new Proxy({},{
-                get:(_,prop)=>this.sprite.transform[prop]
+                get:(_,prop)=>this.sprite.transform[prop],
+                set:(_,prop,value)=>this.sprite.transform[prop]=value
             })
             this.pos=new Proxy({},{
                 get:(_,prop)=>this.sprite.transform.position[prop],
@@ -39,7 +40,7 @@ function Drawable(arg={}){ // src[,frame]
         }]
     }
 
-    PIXI.loader.add(arg.src).load((_,resources)=>{
+    var onTextureLoad=(_,resources)=>{
         var texture;
         if(resources[arg.src].spritesheet){
             var sheet=resources[arg.src].spritesheet;
@@ -49,9 +50,7 @@ function Drawable(arg={}){ // src[,frame]
         else texture=resources[arg.src].texture;
         this.sprite=new PIXI.Sprite(texture);
         this.notifyIsReady(this);
-    });
+    }
+    if(!PIXI.loader.resources[arg.src])PIXI.loader.add(arg.src).load(onTextureLoad);
+    else PIXI.loader.once("complete",onTextureLoad);
 }
-
-
-d=new Drawable({src:"assets/ground-cannon.json",frame:"body",feliz:{sim:{oi:3},não:2}})
-d.ready.then(()=>d.addTo(display.stage))
