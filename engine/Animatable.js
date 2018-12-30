@@ -6,6 +6,26 @@ function Animatable(arg={})
 	this.defanim=!arg.defanim?"Walk":arg.defanim;
 	this.sprite={};
 	this.loaded=false;
+	var self=this;
+	this.transform=new Proxy({},
+	{
+		get:function(o,p)
+		{
+			return this.sprite.transform[p];
+		},
+		set:function(o,p,v)
+		{
+			return this.sprite.transform[p]=v;
+		},
+		has:function(o,p)
+		{
+			return p in self.sprite.transform;
+		},
+		ownKeys:function(o)
+		{
+			return Reflect.ownKeys(self.sprite.transform);
+		}
+	});
 	this.pos=new Proxy([0,0],
 	{
 		get:(pos,prop)=>(prop in pos)?pos[prop]:undefined,

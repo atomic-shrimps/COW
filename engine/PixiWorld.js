@@ -39,5 +39,6 @@ function PixiWorld(arg)
 	PIXI.loader.once("complete", (loader, resources) => {
 		this.trigger("resourceLoad",{res:resources});
 	});
+	display.renderer.on("prerender",((self)=>()=>self.trigger("prerender",{}))(this));
 	PIXI.loader.load();
 }

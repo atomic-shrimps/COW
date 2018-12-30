@@ -66,5 +66,6 @@ function Atom(arg={})
 	{
 		child.parent=this;
 		this.children.push(child);
+		return this.children[this.children.length-1];
 	}
 }
