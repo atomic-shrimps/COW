@@ -12,5 +12,40 @@
         <script src="engine/Display.js"></script>
         <script src="engine/Atom.js"></script>
         <script src="engine/Drawable.js"></script>
+        <script>
+        var cannon={
+            body: new Drawable({
+                src:"assets/ground-cannon.json",
+                frame:"body",
+                transform:{pivot:{
+                    x:117,
+                    y:0
+                }}
+            }),
+            turret: new Drawable({
+                src:"assets/ground-cannon.json",
+                frame:"turret",
+                transform:{pivot:{
+                    x:77,
+                    y:252-173
+                }},
+                pos:{x:117}
+            })
+        }
+        Promise.all([cannon.turret.ready,cannon.body.ready]).then(()=>{
+            cannon.body.addChild(cannon.turret).addTo(pixi.stage);
+            //cannon.turret.addTo(pixi.stage);
+            
+            cannon.body.transform.position.x=window.innerWidth/2;
+            cannon.body.transform.position.y=window.innerHeight/2;
+
+            window.addEventListener('mousemove',(evt)=>{
+                cannon.turret.transform.rotation=Math.PI*0.5+(Math.PI*2)*evt.clientY*0.002;
+                cannon.body.pos.x=(window.innerWidth/2)+((evt.clientX-(window.innerWidth/2))*2);
+            })
+            //setInterval(()=>cannon.turret.transform.rotation=0.01,10);
+            //setInterval(()=>cannon.body.transform.rotation-=0.01,10);
+        })
+        </script>
     </body>
 </html>
