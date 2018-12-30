@@ -8,13 +8,13 @@ function Atom(arg={},asyncLoaded=false)
 	this.id=!arg.id?"Me":arg.id;
 	this.atomic=true;
 	this.on=function(e,handler){
-		this.etv[e]=this.etv[e]?this.etv[e]:[];
-		this.etv[e].push(handler);
+		this.evt[e]=this.evt[e]?this.evt[e]:[];
+		this.evt[e].push(handler);
 	}
 	this.unbind=function(e,handler){
-		this.etv[e]=this.etv[e]?this.etv[e]:[];
-		var index=this.etv[e].indexOf(handler);
-		if(index!=-1)this.etv[e].splice(index,1);
+		this.evt[e]=this.evt[e]?this.evt[e]:[];
+		var index=this.evt[e].indexOf(handler);
+		if(index!=-1)this.evt[e].splice(index,1);
 	}
 	this.parent=null;
 	this.trigger=function(e,param)
