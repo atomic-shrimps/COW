@@ -16,10 +16,12 @@ function Atom(arg={},asyncLoaded=false)
 		var index=this.etv[e].indexOf(handler);
 		if(index!=-1)this.etv[e].splice(index,1);
 	}
+	this.parent=null;
 	this.trigger=function(e,param)
 	{
 		if(!this.evt[e])return;
 		var propagate=true;
+		if(e in this.evt)
 		this.evt[e].forEach(handler=>{
 			var res=handler(param);
 			if(res===false)propagate=false;
@@ -80,10 +82,13 @@ function Atom(arg={},asyncLoaded=false)
         this.trigger_ex("removeFrom",parent);
     }
     this.addChild=function(child){
+		this.children.parent=this;
         this.children.push(child);
         this.trigger_ex("addChild",child);
     }
     this.removeChild=function(child){
+		if(this.children.parent!=this)return;
+		this.children.parent=null;
 		var index=this.children.indexOf(child);
 		if(index!=-1)this.children.splice(index,1);
         this.trigger_ex("removeChild",child);
