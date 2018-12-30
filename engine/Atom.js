@@ -10,11 +10,13 @@ function Atom(arg={},asyncLoaded=false)
 	this.on=function(e,handler){
 		this.evt[e]=this.evt[e]?this.evt[e]:[];
 		this.evt[e].push(handler);
+		return this;
 	}
 	this.unbind=function(e,handler){
 		this.evt[e]=this.evt[e]?this.evt[e]:[];
 		var index=this.evt[e].indexOf(handler);
 		if(index!=-1)this.evt[e].splice(index,1);
+		return this;
 	}
 	this.parent=null;
 	this.trigger=function(e,param)
@@ -30,10 +32,12 @@ function Atom(arg={},asyncLoaded=false)
 		if(propagate)this.children.forEach(child=>{
 			if(child.atomic)child.trigger(e,param);
 		});
+		return this;
 	}
 	this.trigger_ex=function(e,param){ // Trigger event exclusively here
 		if(!this.evt[e])return;
 		this.evt[e].forEach(handler=>handler(param));
+		return this;
 	}
 	this.answer=function(param)
 	{
@@ -75,23 +79,27 @@ function Atom(arg={},asyncLoaded=false)
 	}
 	this.addTo=function(parent){
         if(parent.atomic)parent.addChild(this);
-        this.trigger_ex("addTo",parent);
+		this.trigger_ex("addTo",parent);
+		return this;
 	}
 	this.removeFrom=function(parent){
         if(parent.atomic)parent.removeChild(this);
-        this.trigger_ex("removeFrom",parent);
+		this.trigger_ex("removeFrom",parent);
+		return this;
     }
     this.addChild=function(child){
 		this.children.parent=this;
         this.children.push(child);
-        this.trigger_ex("addChild",child);
+		this.trigger_ex("addChild",child);
+		return this;
     }
     this.removeChild=function(child){
 		if(this.children.parent!=this)return;
 		this.children.parent=null;
 		var index=this.children.indexOf(child);
 		if(index!=-1)this.children.splice(index,1);
-        this.trigger_ex("removeChild",child);
+		this.trigger_ex("removeChild",child);
+		return this;
 	}
 	this.ready.then(()=>{
 		var exploreArg=(_arg, tail=[])=>{
