@@ -24,9 +24,9 @@
 	]});
 	
 	var stickmen=new PixiWorld({});
-	var stickman=stickmen.addChild(new Player({pack:cow,proj:"COW",arm:"Stickman"}));
+	var stickman=(new Player({pack:cow,proj:"COW",arm:"Stickman"})).addTo(stickmen);
 	stickman.pos[0]=window.innerWidth/2;
-	stickman.pos[1]=window.innerHeight/2;
+	stickman.pos[1]=window.innerHeight-1;
 </script>
 </body>
 </html>

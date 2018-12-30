@@ -38,6 +38,7 @@ function PixiWorld(arg,asyncloaded=true)
 	this.sprite=this.display.stage;
 	PIXI.loader.once("complete", (loader, resources) => {
 		this.trigger("resourceLoad",{res:resources});
+		this.notifyIsReady();
 	});
 	display.renderer.on("prerender",((self)=>()=>self.trigger("prerender",{}))(this));
 	display.renderer.on("postrender",((self)=>()=>self.trigger("postrender",{}))(this));

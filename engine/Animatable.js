@@ -33,6 +33,7 @@ function Animatable(arg={},asyncloaded=true)
 	this.on("resourceLoad",((p)=>{
 		loadAnim(this,this.parent,p.res);
 		this.loaded=true;
+		this.notifyIsReady();
 	}));
 }
 
@@ -44,7 +45,7 @@ function loadAnim(anim,parent,res)
 	factory.parseDragonBonesData(resources[cow[0]].data);
 	factory.parseTextureAtlasData(resources[cow[1]].data, resources[cow[2]].texture);
 	var armatureDisplay = factory.buildArmatureDisplay(anim.ref[2], anim.ref[1]);
-	armatureDisplay.animation.play(anim.defanim,1);
+	armatureDisplay.animation.play(anim.defanim);
 	anim.sprite=armatureDisplay;
 	armatureDisplay.x = anim.pos[0];
 	armatureDisplay.y = anim.pos[1];
