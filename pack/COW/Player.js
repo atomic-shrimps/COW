@@ -1,7 +1,7 @@
 function Player(arg={},asyncloaded=true)
 {
 	var self=this;
-	Controllable.call(this,arg,asyncloaded);
+	Controllable.call(this,arg,asyncloaded,Animatable);
 	this.anim=!arg.anim?["Idle","Walk","JumpStart","JumpEnd","WalkJumpStart","WalkJumpEnd","Attack"]:arg.anim;
 	this.falling=false;
 	this.vspeed=0;
