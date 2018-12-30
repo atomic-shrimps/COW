@@ -1,21 +1,20 @@
 function Animatable(arg={})
 {
-	var animself=this;
+	var self=this;
 	Atom.call(this,arg);
 	this.ref=[arg.pack,arg.proj,arg.arm];
 	this.defanim=!arg.defanim?"Walk":arg.defanim;
 	this.sprite={};
 	this.loaded=false;
-	var self=this;
 	this.transform=new Proxy({},
 	{
 		get:function(o,p)
 		{
-			return this.sprite.transform[p];
+			return self.sprite.transform[p];
 		},
 		set:function(o,p,v)
 		{
-			return this.sprite.transform[p]=v;
+			return self.sprite.transform[p]=v;
 		},
 		has:function(o,p)
 		{
@@ -29,10 +28,11 @@ function Animatable(arg={})
 	this.pos=new Proxy([0,0],
 	{
 		get:(pos,prop)=>(prop in pos)?pos[prop]:undefined,
-		set:(pos,prop,val)=>{pos[prop]=animself.sprite[["x","y"][prop]]=val;}
+		set:(pos,prop,val)=>{pos[prop]=self.sprite[["x","y"][prop]]=val;}
 	});
 	this.on("resourceLoad",((p)=>{
 		loadAnim(this,this.parent,p.res);
+		this.loaded=true;
 	}));
 }
 

@@ -40,5 +40,8 @@ function PixiWorld(arg)
 		this.trigger("resourceLoad",{res:resources});
 	});
 	display.renderer.on("prerender",((self)=>()=>self.trigger("prerender",{}))(this));
+	display.renderer.on("postrender",((self)=>()=>self.trigger("postrender",{}))(this));
+	window.addEventListener("keydown",((self)=>(e)=>self.trigger("keydown",e))(this));
+	window.addEventListener("keyup",((self)=>(e)=>self.trigger("keyup",e))(this));
 	PIXI.loader.load();
 }
