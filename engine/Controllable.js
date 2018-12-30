@@ -23,8 +23,8 @@ function Controllable(arg={})
 	{
 		var vspeed=(self.press[0]-self.press[2])*10;
 		var hspeed=(self.press[1]-self.press[3])*10;
-		if(vspeed==hspeed&&hspeed==0)self.sprite.animation.play(self.anim[0]);
-		else if(self.sprite.animation._lastAnimationState.name!=self.anim[1]){self.sprite.animation.play(self.anim[1]);}
+		if(vspeed==hspeed&&hspeed==0&&self.sprite.animation._lastAnimationState.name!=self.anim[0])self.sprite.animation.play(self.anim[0]);
+		else if(!(vspeed==hspeed&&hspeed==0)&&self.sprite.animation._lastAnimationState.name!=self.anim[1]){self.sprite.animation.play(self.anim[1]);}
 		self.pos[1]-=vspeed;
 		self.pos[0]-=hspeed;
 		if(hspeed!=0)self.transform.scale._x=hspeed/10;
