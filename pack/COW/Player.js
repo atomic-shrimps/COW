@@ -8,9 +8,14 @@ function Player(arg={},asyncloaded=true)
 	this.vspeed=0;
 	this.hspeed=0;
 	this.animstate="";
-	this.on("frameupdate",()=>(self.animstate=self.view.animation._lastAnimationState.name,true));
+	this.defanim=!arg.defanim?this.anim[0]:arg.defanim;
+	this.on("frameupdate",()=>{
+		if(!self.view.animation._lastAnimationState)return;
+		self.animstate=self.view.animation._lastAnimationState.name;
+	});
 	this.action=!arg.action?function()
 	{
+		if(!self.view.animation._lastAnimationState)return;
 		var hacc=(self.press[self.code[1]]-self.press[self.code[3]])*10;
 		self.hspeed=hacc;
 		hspeed=self.hspeed;

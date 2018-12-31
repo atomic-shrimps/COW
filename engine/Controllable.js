@@ -3,7 +3,6 @@ function Controllable(arg={})
 	var self=this;
 	if(!"atomic" in this)throw "Controllable Class requires a pre-existing atomic structure.";
 	this.code=!arg.code?"wasd":arg.code;
-	this.anim=!arg.anim?["Idle","Walk","Jump"]:arg.anim;
 	this.press={};
 	for(var i=0;i<this.code.length;i++)
 	{

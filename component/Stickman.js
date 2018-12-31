@@ -7,8 +7,9 @@
                 "pack/COW/COW_tex.png"
                 ],
             proj:"COW",
-            arm:"Stickman",
-            code:!arg.code?'wasd':arg.code
+            arm:!arg.arm?"Stickman":arg.arm,
+            code:!arg.code?'wasd':arg.code,
+            anim:!arg.anim?["Idle","Walk","JumpStart","JumpEnd","WalkJumpStart","WalkJumpEnd","Attack"]:arg.anim
         })
     ])
     this.start=function(){
