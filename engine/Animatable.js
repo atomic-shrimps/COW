@@ -1,53 +1,62 @@
-function Animatable(arg={},asyncloaded=true)
+function Animatable(arg={})
 {
 	var self=this;
-	Atom.call(this,arg,asyncloaded);
+	Atom.call(this,arg,true);
+	//Container.call(this,arg,true);
 	this.ref=[arg.pack,arg.proj,arg.arm];
 	this.defanim=!arg.defanim?"Idle":arg.defanim;
-	this.sprite={};
-	this.loaded=false;
+	this.view={};
 	this.transform=new Proxy({},
 	{
 		get:function(o,p)
 		{
-			return self.sprite.transform[p];
+			return self.view.transform[p];
 		},
 		set:function(o,p,v)
 		{
-			return self.sprite.transform[p]=v;
+			return self.view.transform[p]=v;
 		},
 		has:function(o,p)
 		{
-			return p in self.sprite.transform;
+			return p in self.view.transform;
 		},
 		ownKeys:function(o)
 		{
-			return Reflect.ownKeys(self.sprite.transform);
+			return Reflect.ownKeys(self.view.transform);
 		}
 	});
 	this.pos=new Proxy([0,0],
 	{
 		get:(pos,prop)=>(prop in pos)?pos[prop]:undefined,
-		set:(pos,prop,val)=>{pos[prop]=self.sprite[["x","y"][prop]]=val;}
+		set:(pos,prop,val)=>{pos[prop]=self.view[["x","y"][prop]]=val;}
 	});
-	this.on("resourceLoad",((p)=>{
-		loadAnim(this,this.parent,p.res);
-		this.loaded=true;
-		this.notifyIsReady();
+	this.ready.then((()=>{
+		loadAnim(this);
+		this.trigger("ready");
 	}));
+	const binaryOptions = { loadType: PIXI.loaders.Resource.LOAD_TYPE.XHR, xhrType: PIXI.loaders.Resource.XHR_RESPONSE_TYPE.BUFFER };
+	arg.pack.forEach(file=>
+	{
+		if(!PIXI.loader.resources[file])
+		{
+			if(file.indexOf("dbbin")>=0)
+				PIXI.loader.add(file,binaryOptions);
+			else PIXI.loader.add(file);
+		}
+	});
+	PIXI.loader.load(this.notifyIsReady);
 }
 
-function loadAnim(anim,parent,res)
+function loadAnim(anim)
 {
-	var resources=res;
-	var cow=anim.ref[0].res;
+	var res=PIXI.loader.resources;
+	var cow=anim.ref[0];
 	factory = dragonBones.PixiFactory.factory;
-	factory.parseDragonBonesData(resources[cow[0]].data);
-	factory.parseTextureAtlasData(resources[cow[1]].data, resources[cow[2]].texture);
+	factory.parseDragonBonesData(res[cow[0]].data);
+	factory.parseTextureAtlasData(res[cow[1]].data, res[cow[2]].texture);
 	var armatureDisplay = factory.buildArmatureDisplay(anim.ref[2], anim.ref[1]);
 	armatureDisplay.animation.play(anim.defanim);
-	anim.sprite=armatureDisplay;
+	anim.view=armatureDisplay;
 	armatureDisplay.x = anim.pos[0];
 	armatureDisplay.y = anim.pos[1];
-	parent.sprite.addChild(armatureDisplay);
 }

@@ -1,14 +1,6 @@
-var packs=[];
-
-function Pack(arg={})
+function PixiWorld(arg,asyncloaded=false)
 {
-	this.res=arg.res;
-	packs.push(this.res);
-}
-
-function PixiWorld(arg,asyncloaded=true)
-{
-	Atom.call(this,arg,asyncloaded);
+	Atom.call(this,arg);
 
 	this.display = new PIXI.Application();
 	var display=this.display;
@@ -22,27 +14,10 @@ function PixiWorld(arg,asyncloaded=true)
 	display.renderer.resize(window.innerWidth, window.innerHeight);
 
 	document.body.appendChild(display.view);
+	this.view=this.display.stage;
 
-	const binaryOptions = { loadType: PIXI.loaders.Resource.LOAD_TYPE.XHR, xhrType: PIXI.loaders.Resource.XHR_RESPONSE_TYPE.BUFFER };
-
-	packs.forEach(pack=>{
-		for (const resource of pack) {
-			if (resource.indexOf("dbbin") > 0) {
-				PIXI.loader.add(resource, resource, binaryOptions);
-			}
-			else {
-				PIXI.loader.add(resource, resource);
-			}
-		}
-	});
-	this.sprite=this.display.stage;
-	PIXI.loader.once("complete", (loader, resources) => {
-		this.trigger("resourceLoad",{res:resources});
-		this.notifyIsReady();
-	});
 	display.renderer.on("prerender",((self)=>()=>self.trigger("prerender",{}))(this));
 	display.renderer.on("postrender",((self)=>()=>self.trigger("postrender",{}))(this));
 	window.addEventListener("keydown",((self)=>(e)=>self.trigger("keydown",e))(this));
 	window.addEventListener("keyup",((self)=>(e)=>self.trigger("keyup",e))(this));
-	PIXI.loader.load();
 }

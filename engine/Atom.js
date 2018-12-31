@@ -1,6 +1,8 @@
 function Atom(arg={},asyncLoaded=false)
 {
 	this.ready=new Promise(resolve=>this.notifyIsReady=resolve);
+	this.loaded=false;
+	this.ready.then(()=>this.loaded=true);
 	this.pos=!arg.pos?[0,0]:arg.pos;
 	this.evt=!arg.evt?{}:arg.evt;
 	this.type=this.__proto__.constructor.name;
