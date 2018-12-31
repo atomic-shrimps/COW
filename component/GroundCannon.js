@@ -23,7 +23,10 @@
     this.start=function(){
         this.body.addChild(this.turret);
         this.addChild(this.body);
-        this.pos.x=window.innerWidth/2;
-        this.pos.y=window.innerHeight;
+        ///this.pos.x=window.innerWidth/2;
+        //this.pos.y=window.innerHeight;
+        this.body.transform.scale.x=-1;
+        this.pos.x=100;
+        this.pos.y=30;
     }
 })

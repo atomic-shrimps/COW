@@ -30,11 +30,13 @@
         ])=>{
             window.cannon=new GroundCannon();
             window.player1=new Stickman();
+            window.player3=new Stickman({code:["ArrowUp","ArrowLeft","ArrowDown","ArrowRight"],arm:"Potatoman",anim:["Jump","Walk","JumpTrans","JumpEnd","WalkJumpStart","WalkJumpEnd","Attack"]});
             window.player2=new Stickman({code:"uhjk",arm:"Cow",anim:["Vacabraba","Run","Vacaba","Vaaba","Vacaba","Vabraba","Vacababa"]});
             Promise.all([cannon.ready,player1.ready,player2.ready]).then(()=>{
-                cannon.addTo(world);
                 player1.addTo(world);
                 player2.addTo(world);
+                player3.addTo(world);
+                //cannon.addTo(player2.man.view.children[10]);
             })
         })
         </script>
