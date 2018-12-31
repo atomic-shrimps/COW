@@ -12,15 +12,29 @@
     <body>
         <script src="engine/PixiWorld.js"></script>
         <script src="engine/Atom.js"></script>
+        <script src="engine/Semaphore.js"></script>
         <script src="engine/Container.js"></script>
         <script src="engine/Component.js"></script>
         <script src="engine/Drawable.js"></script>
+        <script src="engine/Animatable.js"></script>
+        <script src="engine/Controllable.js"></script>
+        <script src="pack/COW/Player.js"></script>
         <script>
         var world=new PixiWorld();
-        Component.load({url:"component/GroundCannon.js"}).then(GroundCannon=>{
+        Component.load([
+            "component/GroundCannon.js",
+            "component/Stickman.js"
+        ]).then(([
+            GroundCannon,
+            Stickman
+        ])=>{
             window.cannon=new GroundCannon();
-            cannon.ready.then(()=>{
+            window.player1=new Stickman();
+            window.player2=new Stickman({code:"uhjk"});
+            Promise.all([cannon.ready,player1.ready,player2.ready]).then(()=>{
                 cannon.addTo(world);
+                player1.addTo(world);
+                player2.addTo(world);
             })
         })
         </script>

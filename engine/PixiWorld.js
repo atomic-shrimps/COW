@@ -1,6 +1,6 @@
 function PixiWorld(arg,asyncloaded=false)
 {
-	Atom.call(this,arg);
+	Container.call(this,arg);
 
 	this.display = new PIXI.Application();
 	var display=this.display;
