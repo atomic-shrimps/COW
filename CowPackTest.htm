@@ -16,15 +16,15 @@
 <script src="engine/Controllable.js"></script>
 <script src="pack/COW/Player.js"></script>
 <script>
-	var world=new Atom({children:[]});
-	var cow= new Pack({res:[
+	var cow= [
 	"pack/COW/COW_ske.dbbin",
 	"pack/COW/COW_tex.json",
 	"pack/COW/COW_tex.png"
-	]});
+	];
 	
 	var stickmen=new PixiWorld({});
 	var stickman=(new Player({pack:cow,proj:"COW",arm:"Stickman"})).addTo(stickmen);
+	stickman.ready.then(()=>{stickmen.view.addChild(stickman.view)});;
 	stickman.pos[0]=window.innerWidth/2;
 	stickman.pos[1]=window.innerHeight-1;
 </script>
