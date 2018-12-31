@@ -32,5 +32,6 @@ function Controllable(arg={})
 		var milis=new Date().getMilliseconds();
 		if((milis-self.lastcycle)<self.delay)self.lastcycle=milis;
 		self.action();
+		self.trigger("frameupdate",{});
 	})(this.code));
 }

@@ -7,6 +7,8 @@ function Player(arg={},asyncloaded=true)
 	this.falling=false;
 	this.vspeed=0;
 	this.hspeed=0;
+	this.animstate="";
+	this.on("frameupdate",()=>(self.animstate=self.view.animation._lastAnimationState.name,true));
 	this.action=!arg.action?function()
 	{
 		var hacc=(self.press[self.code[1]]-self.press[self.code[3]])*10;
