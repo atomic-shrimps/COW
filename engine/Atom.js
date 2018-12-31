@@ -115,6 +115,7 @@ function Atom(arg={},asyncLoaded=false)
 				})
 			}
 			exploreArg(arg,[]);
+			this.trigger_ex("ready");
 		})
 	})
 	if(!asyncLoaded)this.notifyIsReady();

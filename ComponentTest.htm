@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Castles Of War</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.4/pixi.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="external/dragonBones.js"></script>
+    </head>
+    <body>
+        <script src="engine/PixiWorld.js"></script>
+        <script src="engine/Atom.js"></script>
+        <script src="engine/Container.js"></script>
+        <script src="engine/Component.js"></script>
+        <script src="engine/Drawable.js"></script>
+        <script>
+        var world=new PixiWorld();
+        Component.load({url:"component/GroundCannon.js"}).then(GroundCannon=>{
+            window.cannon=new GroundCannon();
+            cannon.ready.then(()=>{
+                cannon.addTo(world);
+            })
+        })
+        </script>
+    </body>
+</html>

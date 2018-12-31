@@ -1,0 +1,30 @@
+(function(){
+    Component.call(this,[
+        this.turret=new Drawable({
+            src:"assets/ground-cannon.json",
+            frame:"turret",
+            transform:{pivot:{
+                x:77,
+                y:252-173
+            }},
+            pos:{x:117}
+        }),
+        this.body=new Drawable({
+            src:"assets/ground-cannon.json",
+            frame:"body",
+            transform:{pivot:{
+                x:117,
+                y:0
+            }}
+        })
+    ])
+    this.start=function(){
+        this.body.addChild(this.turret);
+        this.addChild(this.body);
+    }
+    this.ready.then(()=>this.start);
+    this.update=function(){
+        this.turret.transform.rotation=0.01;
+        this.body.transform.rotation-=0.01;
+    }
+})
