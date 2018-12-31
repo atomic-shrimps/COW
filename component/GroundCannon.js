@@ -17,14 +17,13 @@
                 y:0
             }}
         })
-    ])
+    ],{
+        transform:{pivot:{y:160},scale:{x:0.5,y:0.5}}
+    })
     this.start=function(){
         this.body.addChild(this.turret);
         this.addChild(this.body);
-    }
-    this.ready.then(()=>this.start);
-    this.update=function(){
-        this.turret.transform.rotation=0.01;
-        this.body.transform.rotation-=0.01;
+        this.pos.x=window.innerWidth/2;
+        this.pos.y=window.innerHeight;
     }
 })

@@ -35,16 +35,21 @@ function Animatable(arg={})
 		this.trigger("ready");
 	}));
 	const binaryOptions = { loadType: PIXI.loaders.Resource.LOAD_TYPE.XHR, xhrType: PIXI.loaders.Resource.XHR_RESPONSE_TYPE.BUFFER };
-	arg.pack.forEach(file=>
-	{
-		if(!PIXI.loader.resources[file])
+	Semaphore.wait("resource",(done)=>{
+		arg.pack.forEach(file=>
 		{
-			if(file.indexOf("dbbin")>=0)
-				PIXI.loader.add(file,binaryOptions);
-			else PIXI.loader.add(file);
-		}
+			if(!PIXI.loader.resources[file])
+			{
+				if(file.indexOf("dbbin")>=0)
+					PIXI.loader.add(file,binaryOptions);
+				else PIXI.loader.add(file);
+			}
+		});
+		PIXI.loader.load(()=>{
+			this.notifyIsReady();
+			done();
+		});
 	});
-	PIXI.loader.load(this.notifyIsReady);
 }
 
 function loadAnim(anim)
